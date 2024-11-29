@@ -1,0 +1,15 @@
+{
+  "telegram_token": "Your telegram token if you want to send results to telegram",
+  "chat_id": "Telegram chat id if you want to send results to telegram",
+  "display_name": "Display name of the commit author",
+  "author": "Author nickname",
+  "github_token": "Github commit author token",
+  "repositories": [
+    "author/repo1",
+    "author/repo2",
+    "company/repo3"
+  ],
+  "locations": [
+    "If you need to clarify the location of commits"
+  ]
+}
