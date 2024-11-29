@@ -13,5 +13,6 @@ class Messenger:
 
     asyncio.run(bot.send_message(
       chat_id=self.config.get_chat(),
-      text=message
+      text=message,
+      disable_web_page_preview=True
     ))
