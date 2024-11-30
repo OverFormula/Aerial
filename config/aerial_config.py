@@ -1,13 +1,18 @@
 import json
+import os
 from typing import Any
 
 
 class AerialConfig:
   config_data: Any
   manual_data: Any
+  config_path: str
 
   def __init__(self):
-    with open('../config/config.json') as config:
+    environment = os.getenv('ENV', 'Production')
+    self.config_path = '../config/config_dev.json' if environment == 'development' else '../config/config.json'
+
+    with open(self.config_path) as config:
       self.config_data = json.load(config)
     with open('../config/manual.json') as manual:
       self.manual_data = json.load(manual)
