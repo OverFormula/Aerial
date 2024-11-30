@@ -1,6 +1,7 @@
 import datetime
 
 from summary.git_data_accumulator import GitDataAccumulator
+from utils.math_utils import MathUtils
 
 
 class MessageBuilder:
@@ -36,16 +37,19 @@ class MessageBuilder:
   def add_general_info(data_accumulator: GitDataAccumulator, message) -> str:
     days_with_commits = len(data_accumulator.dates) + data_accumulator.extra_days
 
-    message += "Number of days with commits: " + str(days_with_commits) + "\n"
+    message += "Number of days with commits: " + str(days_with_commits) + "\n\n"
+
+    languages = MathUtils.normalize_dict(data_accumulator.language_to_changes)
+    message += 'Languages: <' + '>, <'.join(f'{key}: {value}%' for key, value in languages.items()) + '>\n\n'
 
     if len(data_accumulator.locations) > 1:
-      locations = '\n '.join(map(str, data_accumulator.locations))
-      message += 'Commit locations: ' + '\n ' + locations + '\n\n'
+      locations = '>, <'.join(map(str, data_accumulator.locations))
+      message += 'Commit locations: <' + locations + '>'
     else:
       locations = (str(data_accumulator.locations)
                    .replace("[", "")
                    .replace("]", "")
                    .replace("'", ""))
-      message += "Commit locations: " + locations
+      message += 'Commit locations: ' + locations
 
-    return message
+    return message + '\n'

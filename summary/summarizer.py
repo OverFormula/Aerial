@@ -20,7 +20,7 @@ class Summarizer:
 
   @meta_collector
   def create_summary(self) -> GitDataAccumulator:
-    print('Start summarizing with the config ../config/config.json')
+    print('Start summarizing with the config ' + self.config.config_path)
     data_accumulator = GitDataAccumulator(self.config)
 
     for repo in self.config.get_repositories():
