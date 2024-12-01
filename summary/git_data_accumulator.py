@@ -17,6 +17,7 @@ class GitDataAccumulator:
     self.project_to_additions = {}
     self.project_to_deletions = {}
     self.language_to_changes = {}
+    self.contributions = {}
     self.dates = set()
     self.locations = config.get_locations()
     self.extra_days = config.get_extra_days() if (config.enable_manual() and config.get_extra_days()) else 0
@@ -41,7 +42,9 @@ class GitDataAccumulator:
     increment(self.project_to_additions, repo, additions)
     increment(self.project_to_deletions, repo, deletions)
     self.update_languages(commit_data)
-    self.dates.add(commit_data['commit']['committer']['date'][:10])
+    date = commit_data['commit']['committer']['date'][:10]
+    self.dates.add(date)
+    self.contributions[date] = self.contributions.get(date, 0) + 1
 
   def update_manual(self, project):
     repo = project['repo']
