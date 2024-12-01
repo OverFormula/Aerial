@@ -50,7 +50,7 @@ class Summarizer:
 
   def send_summary(self, data_accumulator: GitDataAccumulator):
     message = MessageBuilder.build_message(data_accumulator)
-    print('\n' + message)
+    print('\n' + message.caption)
     response = input('\n\nDo you want to send this to chat?\n').strip().lower()
 
     if response in ['yes', 'y']:
